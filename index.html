@@ -234,6 +234,76 @@
       section.block { padding:60px 0; }
     }
     @media (max-width: 480px) { .process-grid { grid-template-columns:1fr; } }
+
+    /* ===== Chat assistant widget ===== */
+    .oa-fab {
+      position: fixed; bottom: 22px; right: 22px; z-index: 200;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 13px 20px 13px 16px; border: 1px solid rgba(255,255,255,.14); border-radius: 999px; cursor: pointer;
+      background: linear-gradient(180deg, #f22633, var(--red-2)); color: #fff;
+      font-family: var(--display); font-weight: 600; font-size: 15px;
+      box-shadow: 0 10px 30px rgba(225,26,39,.45); transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .oa-fab:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(225,26,39,.55); }
+    .oa-fab svg { flex: none; }
+    .oa-fab .oa-dot { position: absolute; top: -3px; right: -3px; width: 14px; height: 14px; border-radius: 50%; background: var(--blue); border: 2px solid var(--bg); }
+    .oa-fab.oa-hidden { opacity: 0; pointer-events: none; transform: scale(.8); }
+
+    .oa-panel {
+      position: fixed; bottom: 22px; right: 22px; z-index: 210;
+      width: 380px; max-width: calc(100vw - 32px); height: 560px; max-height: calc(100vh - 44px);
+      display: flex; flex-direction: column; overflow: hidden;
+      background: var(--bg-2); border: 1px solid var(--line); border-radius: 20px;
+      box-shadow: 0 24px 70px rgba(0,0,0,.6);
+      opacity: 0; transform: translateY(16px) scale(.98); pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .oa-panel.oa-open { opacity: 1; transform: none; pointer-events: auto; }
+
+    .oa-head { display: flex; align-items: center; gap: 12px; padding: 15px 16px; background: linear-gradient(180deg, #14171e, #0d0f14); border-bottom: 1px solid var(--line); position: relative; }
+    .oa-head::after { content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px; background: linear-gradient(90deg, transparent, var(--red) 30%, var(--blue) 70%, transparent); opacity:.6; }
+    .oa-head .oa-mark { width: 38px; height: 38px; border-radius: 10px; flex: none; display: grid; place-items: center; background: var(--navy); color: var(--red); font-family: var(--display); font-weight: 700; font-size: 18px; border: 1px solid rgba(255,255,255,.1); }
+    .oa-head .oa-mark svg { width: 22px; height: 22px; }
+    .oa-head h4 { color: #fff; font-size: 15.5px; font-weight: 600; line-height: 1.1; }
+    .oa-head p { color: #8a929c; font-size: 12px; margin-top: 3px; display: flex; align-items: center; gap: 6px; }
+    .oa-head p .oa-live { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.2); }
+    .oa-head .oa-close { margin-left: auto; background: none; border: 0; color: #8a929c; cursor: pointer; width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; }
+    .oa-head .oa-close:hover { background: rgba(255,255,255,.06); color: #fff; }
+
+    .oa-body { flex: 1; overflow-y: auto; padding: 18px 16px 6px; display: flex; flex-direction: column; gap: 10px; scroll-behavior: smooth; }
+    .oa-body::-webkit-scrollbar { width: 8px; } .oa-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 8px; }
+    .oa-row { display: flex; gap: 8px; align-items: flex-end; max-width: 88%; }
+    .oa-row.oa-user { align-self: flex-end; flex-direction: row-reverse; }
+    .oa-av { width: 26px; height: 26px; border-radius: 8px; flex: none; display: grid; place-items: center; background: var(--navy); color: var(--red); font-family: var(--display); font-weight: 700; font-size: 12px; border: 1px solid rgba(255,255,255,.1); }
+    .oa-bubble { padding: 10px 13px; border-radius: 14px; font-size: 14.5px; line-height: 1.5; color: var(--text); background: var(--bg-3); border: 1px solid var(--line); border-bottom-left-radius: 5px; }
+    .oa-user .oa-bubble { background: linear-gradient(180deg, #23324a, #1a2740); color: #eaf1fb; border-color: rgba(90,140,220,.4); border-bottom-left-radius: 14px; border-bottom-right-radius: 5px; }
+    .oa-bubble strong { color: var(--head); }
+    .oa-bubble a { color: #6db3ff; text-decoration: underline; }
+    .oa-bubble.oa-summary { background: rgba(26,104,214,.1); border-color: rgba(26,104,214,.35); }
+    .oa-bubble.oa-summary b { color: #fff; }
+
+    .oa-typing { display: inline-flex; gap: 4px; padding: 12px 14px; }
+    .oa-typing span { width: 7px; height: 7px; border-radius: 50%; background: #7a828c; animation: oablink 1.2s infinite; }
+    .oa-typing span:nth-child(2){ animation-delay:.2s } .oa-typing span:nth-child(3){ animation-delay:.4s }
+    @keyframes oablink { 0%,60%,100%{ opacity:.25; transform: translateY(0) } 30%{ opacity:1; transform: translateY(-3px) } }
+
+    .oa-quick { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 16px 12px; }
+    .oa-chip { font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--silver); background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; transition: all .15s ease; }
+    .oa-chip:hover { border-color: var(--red); color: #fff; background: rgba(225,26,39,.1); }
+    .oa-chip.oa-primary { background: linear-gradient(180deg,#f22633,var(--red-2)); color:#fff; border-color: transparent; }
+    .oa-chip.oa-primary:hover { filter: brightness(1.08); }
+
+    .oa-foot { border-top: 1px solid var(--line); padding: 10px 12px; display: flex; gap: 8px; align-items: center; background: var(--bg-2); }
+    .oa-foot input { flex: 1; background: var(--bg-3); border: 1px solid var(--line); border-radius: 999px; padding: 11px 15px; color: var(--head); font-family: var(--sans); font-size: 14px; outline: none; }
+    .oa-foot input:focus { border-color: var(--blue); }
+    .oa-foot button { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer; background: linear-gradient(180deg,#f22633,var(--red-2)); color: #fff; display: grid; place-items: center; }
+    .oa-foot button:hover { filter: brightness(1.08); }
+    .oa-disc { text-align: center; font-size: 10.5px; color: #6a727c; padding: 0 12px 9px; background: var(--bg-2); }
+
+    @media (max-width: 480px) {
+      .oa-panel { bottom: 0; right: 0; width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; }
+      .oa-fab { bottom: 16px; right: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -466,6 +536,241 @@
       });
     });
     document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- ===== Chat assistant widget ===== -->
+  <button class="oa-fab" id="oaFab" aria-label="Open Ostar assistant">
+    <span class="oa-dot"></span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Ask Ostar
+  </button>
+
+  <div class="oa-panel" id="oaPanel" role="dialog" aria-label="Ostar assistant">
+    <div class="oa-head">
+      <div class="oa-mark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3L22 9.2l-5 4.7 1.3 7.1L12 17.8 5.7 21l1.3-7.1-5-4.7 7.1-.9z"/></svg></div>
+      <div>
+        <h4>Ostar Assistant</h4>
+        <p><span class="oa-live"></span> Online · permits for LA &amp; OC</p>
+      </div>
+      <button class="oa-close" id="oaClose" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="oa-body" id="oaBody"></div>
+    <div class="oa-quick" id="oaQuick"></div>
+    <div class="oa-foot">
+      <input id="oaInput" type="text" placeholder="Type your question…" autocomplete="off" />
+      <button id="oaSend" aria-label="Send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+      </button>
+    </div>
+    <div class="oa-disc">Automated assistant · not legal advice · replies handled by email</div>
+  </div>
+
+  <script>
+  (function () {
+    var EMAIL = "bryan.cariello@ostarservices.com";
+    var fab = document.getElementById('oaFab'), panel = document.getElementById('oaPanel');
+    var body = document.getElementById('oaBody'), quick = document.getElementById('oaQuick');
+    var input = document.getElementById('oaInput'), send = document.getElementById('oaSend');
+    var started = false, awaiting = null, data = {};
+
+    function scroll(){ body.scrollTop = body.scrollHeight; }
+    function clearQuick(){ quick.innerHTML = ''; }
+    function setQuick(chips){
+      clearQuick();
+      chips.forEach(function(c){
+        var b = document.createElement('button');
+        b.className = 'oa-chip' + (c.primary ? ' oa-primary' : '');
+        b.textContent = c.label;
+        b.addEventListener('click', c.onClick);
+        quick.appendChild(b);
+      });
+    }
+    function addRow(html, who, extra){
+      var row = document.createElement('div');
+      row.className = 'oa-row' + (who === 'user' ? ' oa-user' : '');
+      var av = document.createElement('div'); av.className = 'oa-av';
+      av.textContent = who === 'user' ? 'You' : 'O';
+      var bub = document.createElement('div'); bub.className = 'oa-bubble' + (extra ? ' ' + extra : '');
+      bub.innerHTML = html;
+      row.appendChild(av); row.appendChild(bub);
+      body.appendChild(row); scroll(); return bub;
+    }
+    function addUser(t){ addRow(t.replace(/</g,'&lt;'), 'user'); }
+    function typing(){
+      var row = document.createElement('div'); row.className = 'oa-row'; row.id = 'oaTyping';
+      row.innerHTML = '<div class="oa-av">O</div><div class="oa-bubble oa-typing"><span></span><span></span><span></span></div>';
+      body.appendChild(row); scroll();
+    }
+    function stopTyping(){ var t = document.getElementById('oaTyping'); if (t) t.remove(); }
+    function botSay(html, after, extra){
+      typing();
+      setTimeout(function(){ stopTyping(); addRow(html, 'bot', extra); if (after) after(); }, 550 + Math.min(html.length * 8, 700));
+    }
+
+    var MENU = [
+      { label: 'Start a project', primary: true, onClick: startIntake },
+      { label: 'What you handle', onClick: function(){ ask('services'); } },
+      { label: 'Pricing', onClick: function(){ ask('pricing'); } },
+      { label: 'Which areas?', onClick: function(){ ask('areas'); } },
+      { label: 'Talk to a human', onClick: function(){ ask('human'); } }
+    ];
+    function menu(){ setQuick(MENU); }
+
+    function greet(){
+      botSay("Hi! I'm the Ostar intake assistant. 👋 I can get your permit project moving or answer a quick question. What do you need?", menu);
+    }
+
+    // ---- Knowledge base ----
+    function ask(topic){
+      var A = {
+        services: ["We handle four things across LA &amp; OC: <strong>pull &amp; file permits</strong>, <strong>plan-check resubmittals</strong>, <strong>open-permit &amp; job closeout</strong>, and <strong>jobsite safety subcontracting</strong> — all under your GC authorization letter.", true],
+        pricing: ["Flat fee per project, quoted <strong>before</strong> we file:<br>• Standard residential: <strong>$500–$3,500</strong><br>• Light commercial: <strong>$1,500–$15,000</strong><br>• Complex jurisdiction: <strong>$2,500–$50,000</strong><br>Government permit fees are separate. Want a quote for your job?", true],
+        areas: ["We focus on <strong>Los Angeles County</strong> and <strong>Orange County</strong> — LADBS, LA County Building &amp; Safety, and the OC city building departments. If your job sits just outside that, send it and we'll tell you straight.", true],
+        license: ["Ostar isn't CSLB-licensed and doesn't sign drawings or inspect. Every permit is filed under <strong>your GC authorization letter</strong>, so your license stays the party of record — we handle the paperwork and coordination.", true],
+        timeline: ["It depends on the jurisdiction and scope, but we move fast — often days, not weeks. Send the scope and we'll give you a realistic timeline with the quote.", true],
+        closeout: ["Yes — we reconcile open or expired permits, coordinate the remaining inspections, and retire them at completion (including expired-permit reinstatements where the AHJ allows). Want us to look at a specific address?", true],
+        human: ["You can reach Bryan directly at <a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>. Want me to put together a quick inquiry so it's ready to send?", true],
+        fallback: ["I can help with <strong>starting a project</strong>, <strong>pricing</strong>, <strong>areas we cover</strong>, <strong>licensing</strong>, or <strong>permit close-outs</strong> — or connect you by email. What would you like?", false]
+      };
+      var entry = A[topic] || A.fallback;
+      botSay(entry[0], function(){
+        if (entry[1]) setQuick([
+          { label: 'Start a project', primary: true, onClick: startIntake },
+          { label: 'Ask something else', onClick: menu }
+        ]);
+        else menu();
+      });
+    }
+    function match(t){
+      t = t.toLowerCase();
+      if (/pric|cost|fee|how much|charge|rate|quote/.test(t)) return 'pricing';
+      if (/licens|cslb|liab|legal|responsib|insur/.test(t)) return 'license';
+      if (/how long|turnaround|fast|quick|timeline|time frame|how soon/.test(t)) return 'timeline';
+      if (/close ?out|open permit|expired|failed final|final inspection|reinstat/.test(t)) return 'closeout';
+      if (/where|area|city|cover|jurisdic|county|ladbs|orange|\bla\b|los angeles|oc\b/.test(t)) return 'areas';
+      if (/service|what do you|handle|offer|what can/.test(t)) return 'services';
+      if (/human|call|phone|email|contact|reach|talk to|person|someone/.test(t)) return 'human';
+      if (/start|project|quote|permit|need|help|pull/.test(t)) return 'start';
+      if (/^(hi|hey|hello|yo|sup)/.test(t)) return 'hi';
+      return null;
+    }
+
+    // ---- Intake flow ----
+    function startIntake(){
+      data = {}; awaiting = 'scope'; clearQuick();
+      botSay("Great — let's get you a quote. First, <strong>what's the project?</strong> A short description of the scope works.", function(){
+        setQuick([
+          { label: 'Residential remodel', onClick: function(){ fill('scope','Residential remodel'); } },
+          { label: 'Water heater / HVAC', onClick: function(){ fill('scope','Water heater / HVAC change-out'); } },
+          { label: 'Re-roof', onClick: function(){ fill('scope','Re-roof'); } },
+          { label: 'Tenant improvement', onClick: function(){ fill('scope','Tenant improvement (commercial)'); } },
+          { label: 'Permit close-out', onClick: function(){ fill('scope','Open/expired permit close-out'); } },
+          { label: 'Something else', onClick: function(){ botSay('No problem — type a short description of the scope below. ⌨️'); clearQuick(); awaiting='scope'; } }
+        ]);
+      });
+    }
+    function askJurisdiction(){
+      awaiting = 'jurisdiction'; clearQuick();
+      botSay("Got it. <strong>Which city or county</strong> is the job in?", function(){
+        setQuick([
+          { label: 'Los Angeles (LADBS)', onClick: function(){ fill('jurisdiction','City of Los Angeles (LADBS)'); } },
+          { label: 'LA County', onClick: function(){ fill('jurisdiction','LA County unincorporated'); } },
+          { label: 'Orange County', onClick: function(){ fill('jurisdiction','Orange County'); } },
+          { label: 'Long Beach', onClick: function(){ fill('jurisdiction','Long Beach'); } },
+          { label: 'Not sure', onClick: function(){ fill('jurisdiction','Not sure yet'); } }
+        ]);
+      });
+    }
+    function askDeadline(){
+      awaiting = 'deadline'; clearQuick();
+      botSay("And your <strong>deadline?</strong>", function(){
+        setQuick([
+          { label: 'ASAP', onClick: function(){ fill('deadline','ASAP'); } },
+          { label: 'Within 1 week', onClick: function(){ fill('deadline','Within 1 week'); } },
+          { label: 'This month', onClick: function(){ fill('deadline','This month'); } },
+          { label: 'Flexible', onClick: function(){ fill('deadline','Flexible'); } }
+        ]);
+      });
+    }
+    function askName(){
+      awaiting = 'name'; clearQuick();
+      botSay("Last thing — <strong>your name</strong> (and company, if you'd like)? Type it below, or skip.", function(){
+        setQuick([{ label: 'Skip', onClick: function(){ fill('name',''); } }]);
+      });
+    }
+    function fill(field, val){
+      if (val) addUser(val);
+      data[field] = val; awaiting = null;
+      if (field === 'scope') askJurisdiction();
+      else if (field === 'jurisdiction') askDeadline();
+      else if (field === 'deadline') askName();
+      else if (field === 'name') finish();
+    }
+    function finish(){
+      awaiting = null; clearQuick();
+      var subject = "New permit project" + (data.scope ? " — " + data.scope : "");
+      var lines = [
+        "Project / scope: " + (data.scope || ""),
+        "Jurisdiction: " + (data.jurisdiction || ""),
+        "Deadline: " + (data.deadline || ""),
+        (data.name ? "From: " + data.name : ""),
+        "",
+        "Property address: ",
+        "Plan set: (attach PDF if you have one)",
+        "",
+        "(Sent from the Ostar Services website assistant)"
+      ].filter(function(x){ return x !== null; });
+      var mailto = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(lines.join("\n"));
+      var summaryHtml = "Here's your inquiry — ready to send:<br><br>" +
+        "<b>Scope:</b> " + (data.scope || "—") + "<br>" +
+        "<b>Jurisdiction:</b> " + (data.jurisdiction || "—") + "<br>" +
+        "<b>Deadline:</b> " + (data.deadline || "—") + (data.name ? "<br><b>From:</b> " + data.name : "");
+      botSay(summaryHtml, function(){
+        botSay("Tap <strong>Send my inquiry</strong> to open it in your email (just add your property address and plan set), and Bryan will get back to you — usually the same day.", function(){
+          setQuick([
+            { label: '✉ Send my inquiry', primary: true, onClick: function(){ window.location.href = mailto; } },
+            { label: 'Copy details', onClick: function(){ copy(lines.join("\n")); } },
+            { label: 'Start over', onClick: startIntake }
+          ]);
+        });
+      }, 'oa-summary');
+    }
+    function copy(text){
+      try {
+        navigator.clipboard.writeText("To: " + EMAIL + "\n\n" + text).then(function(){
+          botSay("Copied ✓ — paste it into an email to <a href='mailto:" + EMAIL + "'>" + EMAIL + "</a>.");
+        }, function(){ fail(); });
+      } catch(e){ fail(); }
+      function fail(){ botSay("Just email the details to <a href='mailto:" + EMAIL + "'>" + EMAIL + "</a> and we'll take it from there."); }
+    }
+
+    // ---- Input handling ----
+    function handle(text){
+      text = text.trim(); if (!text) return;
+      if (awaiting){ fill(awaiting, text); return; }
+      addUser(text);
+      var m = match(text);
+      if (m === 'start') { startIntake(); return; }
+      if (m === 'hi') { botSay("Hey! Want to start a project or ask about pricing, areas, or timelines?", menu); return; }
+      if (m) { ask(m); return; }
+      ask('fallback');
+      setTimeout(menu, 1400);
+    }
+    function submit(){ var v = input.value; input.value = ''; if (v.trim()) handle(v); }
+    send.addEventListener('click', submit);
+    input.addEventListener('keydown', function(e){ if (e.key === 'Enter') submit(); });
+
+    function open(){
+      panel.classList.add('oa-open'); fab.classList.add('oa-hidden');
+      if (!started){ started = true; setTimeout(greet, 250); }
+      setTimeout(function(){ input.focus(); }, 300);
+    }
+    function close(){ panel.classList.remove('oa-open'); fab.classList.remove('oa-hidden'); }
+    fab.addEventListener('click', open);
+    document.getElementById('oaClose').addEventListener('click', close);
+  })();
   </script>
 </body>
 </html>
