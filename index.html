@@ -29,6 +29,26 @@ header{background:#02060bf2;border-bottom:1px solid #142638}.brand{color:#fff}na
 .escrow-box p{color:#c9d3dd}
 .cta{background:linear-gradient(120deg,#ef233c,#a8101f)}.cta p{color:#ffe3e6}.btn-light{color:#02060b}
 footer{background:#02060b;color:#aeb9c5}
+
+.submit-sec{background:var(--sand)}
+.submit-card{background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:34px;max-width:760px}
+.submit-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.submit-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.submit-field.full{grid-column:1/-1}
+.submit-card label{font-size:.82rem;font-weight:750;color:var(--ink)}
+.submit-card label .req{color:var(--gold)}
+.submit-card input,.submit-card select,.submit-card textarea{width:100%;font:inherit;font-size:.95rem;padding:11px 12px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+.submit-card input:focus,.submit-card select:focus,.submit-card textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(25,140,255,.15)}
+.submit-card textarea{min-height:92px;resize:vertical}
+.submit-actions{margin-top:18px}
+.submit-actions .btn{width:100%}
+.submit-note{font-size:.8rem;color:var(--muted);margin:12px 0 0}
+.submit-status{margin-top:12px;font-size:.92rem;font-weight:650;color:var(--muted)}
+.submit-success{display:none;text-align:center;padding:16px 6px}
+.submit-success .ok{width:54px;height:54px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;background:rgba(25,140,255,.12);color:var(--blue);font-size:28px;font-weight:900}
+.submit-success h3{margin:0 0 6px;font-size:1.3rem}
+.submit-success p{margin:4px 0;color:var(--muted)}
+@media(max-width:560px){.submit-grid{grid-template-columns:1fr}.submit-card{padding:22px}}
 </style>
 <style>
 .oa-fab{position:fixed;bottom:22px;right:22px;z-index:2000;display:inline-flex;align-items:center;gap:10px;padding:13px 20px 13px 16px;border:1px solid rgba(255,255,255,.14);border-radius:999px;cursor:pointer;background:linear-gradient(180deg,#f22633,#b3121d);color:#fff;font-family:Arial,sans-serif;font-weight:700;font-size:15px;box-shadow:0 10px 30px rgba(225,26,39,.45);transition:transform .15s ease,box-shadow .2s ease}
@@ -87,7 +107,31 @@ footer{background:#02060b;color:#aeb9c5}
 <section id="process"><div class="wrap"><div class="section-head"><div class="eyebrow">How it works</div><h2>A straightforward process before anything goes in.</h2></div><div class="steps"><article class="step"><span>STEP 01</span><h3>Send the project</h3><p>Share the address, scope, city or county, and what is holding up the project.</p></article><article class="step"><span>STEP 02</span><h3>We map the permit path</h3><p>We identify the jurisdiction, involved agencies, missing information, and coordination scope.</p></article><article class="step"><span>STEP 03</span><h3>We coordinate the work</h3><p>Once engaged, Ostar runs the agreed permit tasks and keeps communication centralized.</p></article></div></div></section>
 <section class="pricing"><div class="wrap"><div class="section-head"><div class="eyebrow">Project-based pricing</div><h2>Clear scope. Separate agency fees.</h2><p>Ostar fees are quoted by project after scope and jurisdiction are understood. Government plan-check, permit, and agency fees are always separate.</p></div><div class="prices"><article class="price"><div class="eyebrow">Residential</div><h3>Standard residential</h3><div class="range">$500–$3,500</div><p>Single-family homes, additions, ADUs, remodels, solar, pools, and straightforward residential scopes.</p></article><article class="price featured"><div class="eyebrow">Commercial</div><h3>Light commercial</h3><div class="range">$1,500–$15,000</div><p>Tenant improvements, small retail, offices, restaurants, service businesses, and light industrial projects.</p></article><article class="price"><div class="eyebrow">Complex</div><h3>Difficult jurisdictions</h3><div class="range">$2,500–$50,000</div><p>Large commercial, multifamily, special districts, layered-agency review, and difficult jurisdiction work.</p></article></div></div></section>
 <section id="areas"><div class="wrap"><div class="section-head"><div class="eyebrow">Service areas</div><h2>Jurisdiction-focused support where you need it.</h2></div><div class="areas"><article class="area"><div class="eyebrow">California</div><h3>Los Angeles, Orange County &amp; Southern California</h3><p>Permit coordination for residential, commercial, and transaction-related work, plus California Title 24 compliance coordination.</p></article><article class="area"><div class="eyebrow">Florida</div><h3>Tampa Bay and surrounding communities</h3><p>Permit coordination support for contractors, owners, and transaction-related permit needs.</p></article></div></div></section>
-<section class="cta"><div class="wrap"><div class="eyebrow" style="color:#ffd6db">Ready to start?</div><h2>Do not let the permit become the project.</h2><p>Call or text Ostar with the property address, city, and scope. We will tell you what needs to happen next.</p><a class="btn btn-light" href="tel:5622046969">Call or text 562-204-6969</a></div></section></main>
+<section class="submit-sec" id="submit"><div class="wrap"><div class="section-head"><div class="eyebrow">Submit a project</div><h2>Send Ostar your project.</h2><p>Share the address, scope, and what is holding it up. It goes straight to Bryan, and he will tell you the next step &mdash; usually the same day.</p></div><div class="submit-card"><form id="hpSubmit"><div class="submit-grid"><div class="submit-field"><label>Your name <span class="req">*</span></label><input id="hp_name" required placeholder="First and last name"></div><div class="submit-field"><label>Company</label><input id="hp_company" placeholder="Company (optional)"></div><div class="submit-field"><label>Email <span class="req">*</span></label><input id="hp_email" type="email" required placeholder="you@email.com"></div><div class="submit-field"><label>Phone <span class="req">*</span></label><input id="hp_phone" inputmode="tel" required placeholder="Best number to reach you"></div><div class="submit-field full"><label>Property address <span class="req">*</span></label><input id="hp_address" required placeholder="Street, city, state, ZIP"></div><div class="submit-field"><label>City / Jurisdiction <span class="req">*</span></label><input id="hp_city" required placeholder="City, county or agency"></div><div class="submit-field"><label>Project type</label><select id="hp_type"><option>Residential</option><option>Commercial / Tenant Improvement</option><option>Multi-Family</option><option>ADU / Addition / Remodel</option><option>Solar</option><option>Pool</option><option>Title / Escrow Property</option><option>Other</option></select></div><div class="submit-field"><label>What do you need?</label><select id="hp_need"><option>New Permit / Permit Pulling</option><option>Plan Submittal</option><option>Plan-Check Corrections</option><option>Inspection Coordination</option><option>Open Permit Research</option><option>Permit Closeout</option><option>Title 24 Coordination</option><option>Code Violation Research</option><option>Other</option></select></div><div class="submit-field"><label>Timing</label><select id="hp_timing"><option>ASAP</option><option>Within 1 week</option><option>Within 2&ndash;4 weeks</option><option>Planning ahead</option></select></div><div class="submit-field full"><label>Scope / what is holding up the project? <span class="req">*</span></label><textarea id="hp_scope" required placeholder="Describe the work, permit status, corrections, inspection issue, or open permit."></textarea></div></div><p class="submit-note">Please do not include Social Security numbers, banking information, or passwords.</p><div class="submit-actions"><button class="btn btn-primary" type="submit">Send project to Ostar</button></div><div id="hpStatus" class="submit-status"></div></form><div id="hpSuccess" class="submit-success"><div class="ok">&#10003;</div><h3>Your project is on its way to Bryan.</h3><p>We have your details and will reach out shortly &mdash; usually the same day.</p><p>Need it fast? Call or text <a href="tel:5622046969" style="color:var(--blue);font-weight:800">562-204-6969</a>.</p></div></div></div></section>
+<script>
+(function(){
+var form=document.getElementById('hpSubmit');
+if(!form)return;
+var statusEl=document.getElementById('hpStatus');
+form.addEventListener('submit',async function(e){
+e.preventDefault();
+if(!form.reportValidity())return;
+var v=function(id){var el=document.getElementById(id);return el?el.value.trim():'';};
+var btn=form.querySelector('button[type=submit]');var orig=btn.textContent;
+btn.disabled=true;btn.textContent='Sending…';
+statusEl.style.color='var(--muted)';statusEl.textContent='Sending your project to Ostar…';
+var payload={access_key:'0cf58d08-569e-45bf-ab23-a6315b0b813f',subject:'NEW OSTAR PROJECT - '+v('hp_address'),from_name:'Ostar Website — Submit a Project',replyto:v('hp_email'),Name:v('hp_name'),Company:v('hp_company')||'Not provided',Email:v('hp_email'),Phone:v('hp_phone'),'Property Address':v('hp_address'),'City / Jurisdiction':v('hp_city'),'Project Type':v('hp_type'),'Service Needed':v('hp_need'),Timing:v('hp_timing'),'Scope / Issue':v('hp_scope'),Source:'Homepage Submit-a-Project section'};
+try{
+var res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)});
+var data=await res.json();
+if(data.success){form.style.display='none';document.getElementById('hpSuccess').style.display='block';}
+else{statusEl.style.color='var(--gold)';statusEl.textContent='Something went wrong. Please call or text 562-204-6969 or email bryan.cariello@ostarservices.com.';btn.disabled=false;btn.textContent=orig;}
+}catch(err){statusEl.style.color='var(--gold)';statusEl.textContent='Network issue sending the form. Please call or text 562-204-6969.';btn.disabled=false;btn.textContent=orig;}
+});
+})();
+</script>
+
+<section class="cta"><div class="wrap"><div class="eyebrow" style="color:#ffd6db">Ready to start?</div><h2>Do not let the permit become the project.</h2><p>Call or text Ostar with the property address, city, and scope. We will tell you what needs to happen next.</p><a class="btn btn-light" href="tel:5622046969">Call or text 562-204-6969</a><a class="btn btn-outline" href="#submit" style="margin:4px;border-color:#ffffffcc;color:#fff">Submit your project</a></div></section></main>
 <footer><div class="wrap foot"><div><strong>OSTAR SERVICES</strong><br>Permit Coordination &amp; Title 24 Compliance</div><div>Los Angeles County · Orange County · Southern California · Tampa Bay</div></div><div class="wrap foot-links" style="display:flex;flex-wrap:wrap;gap:10px 22px;padding:0 0 22px;font-size:.9rem;opacity:.85"><a href="project.html">Submit a Project</a><a href="contractors.html">Contractors</a><a href="title.html">Title &amp; Escrow</a><a href="title-24-compliance-coordination.html">Title 24</a><a href="open-permit-research.html">Open Permit Research</a><a href="plan-submittal-services.html">Plan Submittals</a><a href="permit-closeout-services.html">Permit Closeout</a><a href="california.html">California</a><a href="florida.html">Florida</a><a href="mailto:bryan.cariello@ostarservices.com">bryan.cariello@ostarservices.com</a></div></footer>
 
 <button class="oa-fab" id="oaFab" aria-label="Open Ostar assistant">
